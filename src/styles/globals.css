@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .link {
+    @apply cursor-pointer hover:underline;
+  }
+  .btm-nav-link {
+    @apply cursor-pointer font-medium rounded-sm py-[3px] px-[7px] border border-amazon_blue-light hover:border-white;
+  }
+}
