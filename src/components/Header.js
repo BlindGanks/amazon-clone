@@ -57,15 +57,17 @@ function Header() {
         </div>
       </div>
       {/* bottom nav*/}
-      <div className="relative flex items-center space-x-1 p-2 pl-6 bg-amazon_blue-light text-white text-sm">
+      <div className="relative flex items-center space-x-1 p-2 pl-6 bg-amazon_blue-light text-white text-sm whitespace-nowrap">
         <p className="link font-bold flex items-center">
           <MenuIcon className="h-6 mr-1" />
           All
         </p>
-        <div className="flex flex-grow">
+        <div className="flex flex-grow lg:flex-grow-0">
           <p className="btm-nav-link">Today's Deals</p>
           <p className="btm-nav-link">Buy Again</p>
           <p className="btm-nav-link">Customer Service</p>
+        </div>
+        <div className="flex-grow hidden lg:inline-flex">
           <p className="btm-nav-link">Browsing History</p>
           <p className="btm-nav-link">blind's Amazon.com</p>
           <p className="btm-nav-link">Gift Cards</p>
