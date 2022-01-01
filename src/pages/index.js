@@ -8,7 +8,10 @@ export default function Home({ products }) {
     <div className="bg-gray-100 ">
       <Head>
         <title>Amazon Clone</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="icon"
+          href="https://i1.wp.com/business-ethics.com/wp-content/uploads/2015/11/Amazon-Logo_Feature.jpg?resize=400%2C430&ssl=1"
+        />
       </Head>
 
       <Header />
