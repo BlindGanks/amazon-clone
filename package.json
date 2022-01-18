@@ -8,7 +8,9 @@
   "dependencies": {
     "@heroicons/react": "^1.0.5",
     "@reduxjs/toolkit": "^1.7.1",
+    "@stripe/stripe-js": "^1.22.0",
     "@tailwindcss/line-clamp": "^0.3.0",
+    "axios": "^0.25.0",
     "currency-formatter": "^1.5.9",
     "firebase": "^9.6.1",
     "next": "latest",
@@ -16,7 +18,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
-    "react-responsive-carousel": "^3.2.22"
+    "react-responsive-carousel": "^3.2.22",
+    "stripe": "^8.197.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",
