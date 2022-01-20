@@ -9,11 +9,21 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectItems } from "../slices/basketSlice";
+import { useState } from "react";
 
 function Header() {
   const { data: session } = useSession();
   const router = useRouter();
   const items = useSelector(selectItems);
+  const [country, setCountry] = useState();
+
+  // gets user country
+  (() => {
+    fetch(`https://api.ipregistry.co/?key=${process.env.IPREGISTRY_API_KEY}`)
+      .then((res) => res.json())
+      .then((payload) => setCountry(payload.location.country.name));
+  })();
+
   return (
     <header>
       {/* top nav*/}
@@ -34,7 +44,7 @@ function Header() {
           </div>
           <div>
             <p className="text-gray-300 font-medium">Deliver to</p>
-            <p className="font-extrabold md:text-sm">Algeria</p>
+            <p className="font-extrabold md:text-sm">{country}</p>
           </div>
         </div>
         <div className="hidden sm:flex items-center h-10 rounded-md flex-grow cursor-pointer bg-yellow-400 hover:bg-yellow-500 mx-4">
