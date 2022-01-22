@@ -19,7 +19,7 @@ function Header() {
 
   // gets user country
   (() => {
-    fetch(`https://api.ipregistry.co/?key=${process.env.IPREGISTRY_API_KEY}`)
+    fetch(`https://api.ipregistry.co?key=kuln52efbe91sj71`)
       .then((res) => res.json())
       .then((payload) => setCountry(payload.location.country.name));
   })();
