@@ -78,7 +78,7 @@ function Header() {
         </div>
       </div>
       {/* bottom nav*/}
-      <div className="relative flex items-center space-x-1 p-2 pl-6 bg-amazon_blue-light text-white text-sm whitespace-nowrap">
+      <div className="relative flex items-center space-x-1 p-2 sm:pl-6 bg-amazon_blue-light text-white text-sm whitespace-nowrap">
         <p className="link font-bold flex items-center">
           <MenuIcon className="h-6 mr-1" />
           All
@@ -95,7 +95,7 @@ function Header() {
           <p className="btm-nav-link">Registry</p>
           <p className="btm-nav-link">Sell</p>
         </div>
-        <p className="btm-nav-link">Shop All Deals</p>
+        <p className="btm-nav-link hidden lg:inline-flex">Shop All Deals</p>
       </div>
     </header>
   );
