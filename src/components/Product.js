@@ -4,9 +4,17 @@ import { StarIcon } from "@heroicons/react/solid";
 import { addToBasket } from "../slices/basketSlice";
 import { useDispatch } from "react-redux";
 
-function Product({ title, image, price, id, description, category, rating }) {
+function Product({
+  title,
+  image,
+  price,
+  id,
+  description,
+  category,
+  rating,
+  hasPrime,
+}) {
   const dispatch = useDispatch();
-  const [hasPrime] = useState(Math.random() < 0.5);
   const currencyFormatter = require("currency-formatter");
 
   const addItemToBasket = () => {
@@ -38,9 +46,7 @@ function Product({ title, image, price, id, description, category, rating }) {
           ))}
       </div>
       <p className="text-xs my-2 line-clamp-2">{description}</p>
-      <div className="mb-5">
-        {currencyFormatter.format(price, { code: "USD" })}
-      </div>
+      <p className="mb-5">{currencyFormatter.format(price, { code: "USD" })}</p>
       {hasPrime && (
         <div className="flex items-center space-x-2 -mt-5">
           <img
