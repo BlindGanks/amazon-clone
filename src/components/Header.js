@@ -19,7 +19,7 @@ function Header() {
 
   // gets user country
   (() => {
-    if (window)
+    if (typeof window !== "undefined")
       fetch(`https://api.ipregistry.co?key=gp6x0be5x9mim6lt`)
         .then((res) => res.json())
         .then((payload) => setCountry(payload.location.country.name))
