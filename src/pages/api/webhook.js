@@ -8,7 +8,10 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
 
 const fulfillOrder = async (session) => {
-  const db = admin.firestore();
+  if (!admin.apps) {
+    return { doc: null, error: "admin sdk not initialized", success: false };
+  }
+  const db = admin.firestore;
   const docRef = db
     .collection("users")
     .doc(session.metadata.email)
@@ -28,12 +31,6 @@ const fulfillOrder = async (session) => {
 };
 export default async (req, res) => {
   if (req.method === "POST") {
-    if (!admin.apps) {
-      res
-        .status(500)
-        .send({ success: false, error: "firebase sdk not Initialized" });
-      return;
-    }
     const requestBuffer = await buffer(req);
     const payload = requestBuffer.toString();
     const sig = req.headers["stripe-signature"];
