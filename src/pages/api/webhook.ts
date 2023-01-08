@@ -15,15 +15,15 @@ const fulfillOrder = async (session) => {
     .collection("orders")
     .doc(session.id);
   try {
-    const doc = docRef.set({
+    const doc = await docRef.set({
       amount: session.amount_total / 100,
       amount_shipping: session.total_details.amount_shipping / 100,
       images: JSON.parse(session.metadata.images),
       timestamp: Timestamp.now(),
     });
-    return { doc, fulfilled: true };
+    return { doc, error: null, fulfilled: true };
   } catch (err) {
-    return { err: err.message, fulfilled: false };
+    return { error: err.message, doc: null, fulfilled: false };
   }
 };
 export default async (req, res) => {
@@ -55,7 +55,7 @@ export default async (req, res) => {
 
       const order = await fulfillOrder(session);
       if (!order.fulfilled) {
-        return res.status(500).send(`fulfillment error: ${order.err}`);
+        return res.status(500).send(`fulfillment error: ${order.error}`);
       }
       return res.status(200);
     }
