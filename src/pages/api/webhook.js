@@ -9,10 +9,10 @@ const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
 
 const fulfillOrder = async (session) => {
   if (!admin.apps) {
-    return { doc: null, error: "admin sdk not initialized", success: false };
+    return { doc: null, error: "admin sdk not initialized", fulfilled: false };
   }
-  const db = admin.firestore;
-  const docRef = db
+  const docRef = admin
+    .firestore()
     .collection("users")
     .doc(session.metadata.email)
     .collection("orders")
