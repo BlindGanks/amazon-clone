@@ -1,6 +1,6 @@
-import { serverTimestamp } from "firebase/firestore";
 import { buffer } from "micro";
 import admin from "../../libs/firebase/firebaseAdmin";
+import { Timestamp } from "firebase-admin/firestore";
 
 // establish connection to stripe
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
@@ -19,7 +19,7 @@ const fulfillOrder = async (session) => {
       amount: session.amount_total / 100,
       amount_shipping: session.total_details.amount_shipping / 100,
       images: JSON.parse(session.metadata.images),
-      timestamp: serverTimestamp(),
+      timestamp: Timestamp.now(),
     });
     return { doc, fulfilled: true };
   } catch (err) {
