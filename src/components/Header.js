@@ -15,13 +15,15 @@ function Header() {
   const { data: session } = useSession();
   const router = useRouter();
   const items = useSelector(selectItems);
-  const [country, setCountry] = useState();
+  const [country, setCountry] = useState("");
 
   // gets user country
   (() => {
-    fetch(`https://api.ipregistry.co?key=kuln52efbe91sj71`)
-      .then((res) => res.json())
-      .then((payload) => setCountry(payload.location.country.name));
+    if (window)
+      fetch(`https://api.ipregistry.co?key=gp6x0be5x9mim6lt`)
+        .then((res) => res.json())
+        .then((payload) => setCountry(payload.location.country.name))
+        .catch((err) => console.log(err));
   })();
 
   return (
