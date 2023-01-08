@@ -1,4 +1,4 @@
-import { FieldValue } from "firebase/firestore";
+import { serverTimestamp } from "firebase/firestore";
 import { buffer } from "micro";
 import admin from "../../libs/firebase/firebaseAdmin";
 
@@ -19,11 +19,11 @@ const fulfillOrder = async (session) => {
       amount: session.amount_total / 100,
       amount_shipping: session.total_details.amount_shipping / 100,
       images: JSON.parse(session.metadata.images),
-      timestamp: FieldValue.serverTimestamp(),
+      timestamp: serverTimestamp(),
     });
     return { doc, fulfilled: true };
   } catch (err) {
-    return { err, fulfilled: false };
+    return { err: err.message, fulfilled: false };
   }
 };
 export default async (req, res) => {
