@@ -55,7 +55,7 @@ export default async (req, res) => {
 
       const order = await fulfillOrder(session);
       if (!order.fulfilled) {
-        return res.status(500).send("order not fulfilled");
+        return res.status(500).send(`fulfillment error: ${order.err}`);
       }
       return res.status(200);
     }
