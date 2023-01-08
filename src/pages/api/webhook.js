@@ -14,12 +14,17 @@ const fulfillOrder = async (session) => {
     .doc(session.metadata.email)
     .collection("orders")
     .doc(session.id);
-  return docRef.set({
-    amount: session.amount_total / 100,
-    amount_shipping: session.total_details.amount_shipping / 100,
-    images: JSON.parse(session.metadata.images),
-    timestamp: FieldValue.serverTimestamp(),
-  });
+  try {
+    const doc = docRef.set({
+      amount: session.amount_total / 100,
+      amount_shipping: session.total_details.amount_shipping / 100,
+      images: JSON.parse(session.metadata.images),
+      timestamp: FieldValue.serverTimestamp(),
+    });
+    return { doc, fulfilled: true };
+  } catch (err) {
+    return { err, fulfilled: false };
+  }
 };
 export default async (req, res) => {
   if (req.method === "POST") {
@@ -48,9 +53,11 @@ export default async (req, res) => {
 
       // fulfill order...
 
-      return fulfillOrder(session)
-        .then(() => res.status(200))
-        .catch((err) => res.status(400));
+      const order = await fulfillOrder(session);
+      if (!order.fulfilled) {
+        return res.status(500).send("order not fulfilled");
+      }
+      return res.status(200);
     }
   }
 };
