@@ -1,23 +1,14 @@
+import { FieldValue } from "firebase/firestore";
 import { buffer } from "micro";
-import * as admin from "firebase-admin";
-const { getFirestore, FieldValue } = require("firebase-admin/firestore");
-
-// secure a connection to firebase
-const serviceAccount = require("../../../permissions.json");
-const app = !admin.apps.length
-  ? admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-    })
-  : admin.app;
-const db = getFirestore();
+import admin from "../../libs/firebase/firebaseAdmin";
 
 // establish connection to stripe
-
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
 
 const fulfillOrder = async (session) => {
+  const db = admin.firestore();
   const docRef = db
     .collection("users")
     .doc(session.metadata.email)
@@ -32,12 +23,17 @@ const fulfillOrder = async (session) => {
 };
 export default async (req, res) => {
   if (req.method === "POST") {
+    if (!admin.apps) {
+      res
+        .status(500)
+        .send({ success: false, error: "firebase sdk not Initialized" });
+      return;
+    }
     const requestBuffer = await buffer(req);
     const payload = requestBuffer.toString();
     const sig = req.headers["stripe-signature"];
 
     let event;
-
     // verify that the event posted came from stripe
     try {
       event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);

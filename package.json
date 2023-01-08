@@ -6,23 +6,23 @@
     "start": "next start"
   },
   "dependencies": {
-    "@heroicons/react": "^1.0.5",
-    "@reduxjs/toolkit": "^1.7.1",
-    "@stripe/stripe-js": "^1.22.0",
+    "@heroicons/react": "^1.0.6",
+    "@reduxjs/toolkit": "^1.9.1",
+    "@stripe/stripe-js": "^1.46.0",
     "@tailwindcss/line-clamp": "^0.3.0",
-    "axios": "^0.25.0",
+    "axios": "^1.2.2",
     "currency-formatter": "^1.5.9",
     "firebase": "^9.15.0",
     "firebase-admin": "^11.4.1",
-    "micro": "^9.3.4",
-    "moment": "^2.29.1",
+    "micro": "^10.0.1",
+    "moment": "^2.29.4",
     "next": "12.3.0",
-    "next-auth": "^4.0.6",
+    "next-auth": "^4.18.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-redux": "^7.2.6",
-    "react-responsive-carousel": "^3.2.22",
-    "stripe": "^8.197.0"
+    "react-redux": "^8.0.5",
+    "react-responsive-carousel": "^3.2.23",
+    "stripe": "^11.6.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",

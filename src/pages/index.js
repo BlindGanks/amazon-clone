@@ -28,14 +28,15 @@ export default function Home({ products }) {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  let products = await fetch("https://fakestoreapi.com/products").then((res) =>
-    res.json()
-  );
-  products = products.map((product) => ({
-    ...product,
-    hasPrime: Math.random() < 0.5,
-  }));
-
+  let products = await fetch("https://fakestoreapi.com/products")
+    .then((res) => res.json())
+    .then((products) =>
+      products.map((product) => ({
+        ...product,
+        hasPrime: Math.random() < 0.5,
+      }))
+    )
+    .catch((err) => []);
   return {
     props: {
       products,

@@ -2,7 +2,7 @@ import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import moment from "moment";
 import { getSession, useSession } from "next-auth/react";
 import React from "react";
-import { db } from "../../firebase";
+import { db } from "../libs/firebase/firebase";
 import Header from "../components/Header";
 import Order from "../components/Order";
 
