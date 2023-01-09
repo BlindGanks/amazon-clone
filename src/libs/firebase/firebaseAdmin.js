@@ -3,7 +3,7 @@ import { getApp } from "firebase-admin/app";
 import { getFirestore } from "firebase-admin/firestore";
 import { firebaseServiceAccount } from "./firebase-creds";
 let app =
-  !getApp() &&
+  !getApp("admin-app") &&
   initializeApp({
     credential: admin.credential.cert(
       {
