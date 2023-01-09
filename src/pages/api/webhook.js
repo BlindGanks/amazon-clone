@@ -39,7 +39,7 @@ export default async (req, res) => {
       console.log("ERROR", err.message);
       return res.status(400).send(`webhook error: ${err.message}`);
     }
-
+    res.status(200).send("webhook call recaived, proceeds to fulfill order");
     // handle the checkout.session.completed event
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
@@ -47,10 +47,6 @@ export default async (req, res) => {
       // fulfill order...
 
       const order = await fulfillOrder(session);
-      if (!order.fulfilled) {
-        return res.status(500).send(`fulfillment error: ${order.error}`);
-      }
-      return res.status(200);
     }
   }
 };
@@ -58,5 +54,6 @@ export default async (req, res) => {
 export const config = {
   api: {
     bodyParser: false,
+    externalResolver: true,
   },
 };
