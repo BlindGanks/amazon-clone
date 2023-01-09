@@ -58,6 +58,5 @@ export default async (req, res) => {
 export const config = {
   api: {
     bodyParser: false,
-    externalResolver: true,
   },
 };
