@@ -1,6 +1,6 @@
 import { buffer } from "micro";
-import admin from "../../libs/firebase/firebaseAdmin";
 import { Timestamp } from "firebase-admin/firestore";
+import adminFirestore from "../../libs/firebase/firebaseAdmin";
 
 // establish connection to stripe
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
@@ -8,11 +8,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const endpointSecret = process.env.STRIPE_SIGNING_SECRET;
 
 const fulfillOrder = async (session) => {
-  if (!admin.apps) {
-    return { doc: null, error: "admin sdk not initialized", fulfilled: false };
-  }
-  const docRef = admin
-    .firestore()
+  const docRef = adminFirestore
     .collection("users")
     .doc(session.metadata.email)
     .collection("orders")

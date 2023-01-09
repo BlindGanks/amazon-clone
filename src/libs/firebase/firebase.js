@@ -3,15 +3,15 @@ import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: "clone-2-656a5.firebaseapp.com",
-  projectId: "clone-2-656a5",
-  storageBucket: "clone-2-656a5.appspot.com",
-  messagingSenderId: "658312207361",
-  appId: "1:658312207361:web:8427157890e9622bd3f400",
+  authDomain: "clone-3-2755d.firebaseapp.com",
+  projectId: "clone-3-2755d",
+  storageBucket: "clone-3-2755d.appspot.com",
+  messagingSenderId: "724897053598",
+  appId: "1:724897053598:web:a2d3fb2a64a2857b8eb48f",
 };
 
 // Initialize Firebase
-const app = !getApps.length ? initializeApp(firebaseConfig) : getApp();
-const db = getFirestore();
+const app = !getApp() ? initializeApp(firebaseConfig, "client-app") : getApp();
+const db = getFirestore(app);
 
 export { db };
