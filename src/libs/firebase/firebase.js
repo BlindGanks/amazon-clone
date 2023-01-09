@@ -1,4 +1,4 @@
-import { initializeApp, getApp } from "firebase/app";
+import { initializeApp, getApp, getApps } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -11,7 +11,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = !getApp("client-app")
+const app = !getApps().length
   ? initializeApp(firebaseConfig, "client-app")
   : getApp("client-app");
 const db = getFirestore(app);
